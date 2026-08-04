@@ -1,0 +1,38 @@
+# Render blueprint — one Docker web service.
+#
+#   1. Push this repository to GitHub.
+#   2. In Render: New > Blueprint, point it at the repository.
+#   3. Set the three COGNODB_* values (marked sync: false, so Render prompts
+#      for them rather than reading them from this file).
+#   4. Deploy, then seed once from a machine that has the same .env:
+#        npm run seed
+#
+# The secrets are never committed: `sync: false` means Render asks for the
+# value in its dashboard and stores it encrypted.
+
+services:
+  - type: web
+    name: network-blast-radius
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      # Render injects its own PORT; the app reads it.
+      - key: PORT
+        value: 8080
+
+      - key: COGNODB_URI
+        sync: false
+      - key: COGNODB_USER
+        sync: false
+      - key: COGNODB_PASSWORD
+        sync: false
+
+      # The SPOF audit is the one expensive screen. Five minutes of caching
+      # keeps a free instance responsive without hiding data changes for long.
+      - key: SPOF_CACHE_TTL_SECONDS
+        value: 300

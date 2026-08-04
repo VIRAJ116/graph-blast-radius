@@ -1,0 +1,21 @@
+{
+  "name": "cognodb-network-blast-radius",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Network blast-radius explorer built on CognoDB Cloud (graph database over Bolt/openCypher)",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "seed": "npm run seed --prefix server",
+    "seed:reset": "npm run seed:reset --prefix server",
+    "schema": "npm run schema --prefix server",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "dev": "npm run dev:server & npm run dev:client",
+    "build": "npm run build --prefix client",
+    "start": "npm start --prefix server"
+  }
+}

@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-surface-base text-slate-200;
+  }
+
+  /* Keyboard focus stays visible everywhere; pointer focus does not draw rings. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-sky-400/70 ring-offset-2 ring-offset-surface-base;
+  }
+
+  /* Scrollbars styled to match the panels rather than punching bright holes in them. */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-surface-border;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-600;
+  }
+}
+
+@layer components {
+  /* Wide content — tables, Cypher blocks — scrolls inside its own container so
+     the page body never scrolls sideways. */
+  .scroll-x {
+    @apply overflow-x-auto;
+  }
+}
