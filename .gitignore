@@ -20,7 +20,7 @@ npm-debug.log*
 .vscode/
 
 # Assignment source PDF
-docs/
+docs/specs
 *.pdf
 IMPLEMENTATION_BACKEND.md
 IMPLEMENTATION_FRONTEND.md
